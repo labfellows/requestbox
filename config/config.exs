@@ -12,7 +12,7 @@ config :requestbox, ecto_repos: [Requestbox.Repo]
 config :requestbox, RequestboxWeb.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "HuiaFVoiGvYFhfAPG/OOMmOI9DV0kAVe4TZVbq1lR3nSWtdeRVmniAFVU+H84aBx",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   pubsub: [name: Requestbox.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

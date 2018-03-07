@@ -13,8 +13,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :requestbox, RequestboxWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: System.get_env("HOSTNAME"), port: 443],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  url: [host: System.get_env("HOSTNAME")],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
@@ -24,7 +23,7 @@ config :logger, level: :info
 config :requestbox, Requestbox.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 20
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 # ## SSL Support
 #
